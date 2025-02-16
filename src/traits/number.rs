@@ -1,3 +1,5 @@
+use crate::{Cartesian, Polar};
+
 pub trait Number {
     /// Returns the real part of this number.
     fn real(&self) -> f64 {
@@ -19,6 +21,57 @@ pub trait Number {
     #[inline]
     fn phase(&self) -> f64 {
         f64::atan2(self.imag(), self.real())
+    }
+
+    /// Computes the sum of two numbers.
+    #[inline]
+    fn add(&self, rhs: impl Number) -> Cartesian<f64, f64> {
+        Cartesian {
+            real: self.real() + rhs.real(),
+            imag: self.imag() + rhs.imag(),
+        }
+    }
+
+    /// Computes the difference of two numbers.
+    #[inline]
+    fn sub(&self, rhs: impl Number) -> Cartesian<f64, f64> {
+        Cartesian {
+            real: self.real() - rhs.real(),
+            imag: self.imag() - rhs.imag(),
+        }
+    }
+
+    /// Computes the product of two numbers in cartesian form.
+    #[inline]
+    fn cartesian_mul(&self, rhs: impl Number) -> Cartesian<f64, f64> {
+        Cartesian {
+            real: self.real() * rhs.real() - self.imag() * rhs.imag(),
+            imag: self.real() * rhs.imag() + self.imag() * rhs.real(),
+        }
+    }
+
+    /// Computes the product of two numbers in polar form.
+    #[inline]
+    fn polar_mul(&self, rhs: impl Number) -> Polar<f64, f64> {
+        Polar {
+            magnitude: self.magnitude() * rhs.magnitude(),
+            phase: self.phase() + rhs.phase(),
+        }
+    }
+
+    /// Computes the product of two numbers.
+    #[inline]
+    fn mul(&self, rhs: impl Number) -> Polar<f64, f64> {
+        self.polar_mul(rhs)
+    }
+
+    /// Computes the quotient of two numbers.
+    #[inline]
+    fn div(&self, rhs: impl Number) -> Polar<f64, f64> {
+        Polar {
+            magnitude: self.magnitude() / rhs.magnitude(),
+            phase: self.phase() - rhs.phase(),
+        }
     }
 }
 
