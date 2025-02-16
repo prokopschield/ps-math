@@ -1,7 +1,7 @@
 use crate::Number;
 
 #[derive(Clone, Copy, Debug, Default, Hash, PartialEq, Eq, PartialOrd, Ord)]
-pub struct Cartesian<R, I>
+pub struct Cartesian<R = f64, I = R>
 where
     R: Number,
     I: Number,

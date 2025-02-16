@@ -25,7 +25,7 @@ pub trait Number {
 
     /// Computes the sum of two numbers.
     #[inline]
-    fn add(&self, rhs: impl Number) -> Cartesian<f64, f64> {
+    fn add(&self, rhs: impl Number) -> Cartesian {
         Cartesian {
             real: self.real() + rhs.real(),
             imag: self.imag() + rhs.imag(),
@@ -34,7 +34,7 @@ pub trait Number {
 
     /// Computes the difference of two numbers.
     #[inline]
-    fn sub(&self, rhs: impl Number) -> Cartesian<f64, f64> {
+    fn sub(&self, rhs: impl Number) -> Cartesian {
         Cartesian {
             real: self.real() - rhs.real(),
             imag: self.imag() - rhs.imag(),
@@ -43,7 +43,7 @@ pub trait Number {
 
     /// Computes the product of two numbers in cartesian form.
     #[inline]
-    fn cartesian_mul(&self, rhs: impl Number) -> Cartesian<f64, f64> {
+    fn cartesian_mul(&self, rhs: impl Number) -> Cartesian {
         Cartesian {
             real: self.real() * rhs.real() - self.imag() * rhs.imag(),
             imag: self.real() * rhs.imag() + self.imag() * rhs.real(),
@@ -52,7 +52,7 @@ pub trait Number {
 
     /// Computes the product of two numbers in polar form.
     #[inline]
-    fn polar_mul(&self, rhs: impl Number) -> Polar<f64, f64> {
+    fn polar_mul(&self, rhs: impl Number) -> Polar {
         Polar {
             magnitude: self.magnitude() * rhs.magnitude(),
             phase: self.phase() + rhs.phase(),
@@ -61,13 +61,13 @@ pub trait Number {
 
     /// Computes the product of two numbers.
     #[inline]
-    fn mul(&self, rhs: impl Number) -> Polar<f64, f64> {
+    fn mul(&self, rhs: impl Number) -> Polar {
         self.polar_mul(rhs)
     }
 
     /// Computes the quotient of two numbers.
     #[inline]
-    fn div(&self, rhs: impl Number) -> Polar<f64, f64> {
+    fn div(&self, rhs: impl Number) -> Polar {
         Polar {
             magnitude: self.magnitude() / rhs.magnitude(),
             phase: self.phase() - rhs.phase(),
@@ -122,37 +122,37 @@ impl<T: Number> Number for &T {
 
     /// Computes the sum of two numbers.
     #[inline]
-    fn add(&self, rhs: impl Number) -> Cartesian<f64, f64> {
+    fn add(&self, rhs: impl Number) -> Cartesian {
         (**self).add(rhs)
     }
 
     /// Computes the difference of two numbers.
     #[inline]
-    fn sub(&self, rhs: impl Number) -> Cartesian<f64, f64> {
+    fn sub(&self, rhs: impl Number) -> Cartesian {
         (**self).sub(rhs)
     }
 
     /// Computes the product of two numbers in cartesian form.
     #[inline]
-    fn cartesian_mul(&self, rhs: impl Number) -> Cartesian<f64, f64> {
+    fn cartesian_mul(&self, rhs: impl Number) -> Cartesian {
         (**self).cartesian_mul(rhs)
     }
 
     /// Computes the product of two numbers in polar form.
     #[inline]
-    fn polar_mul(&self, rhs: impl Number) -> Polar<f64, f64> {
+    fn polar_mul(&self, rhs: impl Number) -> Polar {
         (**self).polar_mul(rhs)
     }
 
     /// Computes the product of two numbers.
     #[inline]
-    fn mul(&self, rhs: impl Number) -> Polar<f64, f64> {
+    fn mul(&self, rhs: impl Number) -> Polar {
         (**self).mul(rhs)
     }
 
     /// Computes the quotient of two numbers.
     #[inline]
-    fn div(&self, rhs: impl Number) -> Polar<f64, f64> {
+    fn div(&self, rhs: impl Number) -> Polar {
         (**self).div(rhs)
     }
 }

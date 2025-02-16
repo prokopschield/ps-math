@@ -1,7 +1,7 @@
 use crate::Number;
 
 #[derive(Clone, Copy, Debug, Default, Hash, PartialEq, Eq, PartialOrd, Ord)]
-pub struct Polar<M, P>
+pub struct Polar<M = f64, P = M>
 where
     M: Number,
     P: Number,
