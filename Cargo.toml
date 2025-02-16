@@ -1,0 +1,12 @@
+[package]
+name = "ps-math"
+description = "A mathematical library for convenient calculation."
+version = "0.1.0-dev"
+edition = "2021"
+license = "GPL-3.0-or-later"
+
+[profile.dev]
+opt-level = 3
+
+[profile.release]
+opt-level = 3
